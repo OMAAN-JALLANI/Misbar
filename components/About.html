@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Misbar Industrial</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- 1. GLOBAL THEME --- */
+        :root {
+            --primary-color: #008f7a; /* Misbar Teal */
+            --primary-dark: #006c5b;
+            --secondary-dark: #1a1a1a;
+            --text-grey: #555;
+            --bg-light: #f8f9fa;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--secondary-dark);
+            line-height: 1.6;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
+
+        /* --- 2. ANIMATIONS (Fade Up) --- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            opacity: 0;
+            animation: fadeUp 1s ease-out forwards;
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+
+        /* --- 3. HERO HEADER --- */
+        .about-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            /* Add your image here */
+            background-image: url('../images/14.webp'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0, 143, 122, 0.7) 100%);
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- 4. INTRO SECTION (Story) --- */
+        .intro-section {
+            padding: 100px 0;
+            background: #fff;
+        }
+
+        .intro-grid {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .intro-text { flex: 1; }
+        .intro-img { flex: 1; position: relative; }
+
+        .section-tag {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            color: var(--secondary-dark);
+        }
+
+        .lead-text {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .intro-desc {
+            color: var(--text-grey);
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .intro-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 20px 20px 0px var(--bg-light); /* Subtle shadow effect */
+        }
+
+        /* --- 5. VISION & MISSION CARDS --- */
+        .vm-section {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+
+        .vm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .vm-card {
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 12px;
+            border-bottom: 4px solid transparent;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vm-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--primary-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .vm-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+
+        .vm-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
+        .vm-card p { color: var(--text-grey); font-size: 1rem; }
+
+        /* --- 6. ISO / STANDARDS STRIP (Dark) --- */
+        .iso-strip {
+            background: var(--secondary-dark);
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .iso-title {
+            margin-bottom: 50px;
+            font-size: 2rem;
+        }
+        
+        .iso-title span { color: var(--primary-color); }
+
+        .iso-icons {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .iso-box {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px 40px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .iso-box:hover {
+            border-color: var(--primary-color);
+            background: rgba(0, 143, 122, 0.1);
+        }
+
+        .iso-box i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .iso-box h4 {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- 7. FLOATING HOME BUTTON --- */
+        .float-home {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            background: var(--primary-color);
+            color: #fff;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            z-index: 100; text-decoration: none;
+            transition: 0.3s;
+        }
+        .float-home:hover { transform: scale(1.1); background: #006c5b; }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero-title { font-size: 2.5rem; }
+            
+            .intro-grid { flex-direction: column; }
+            .intro-img { order: 1; margin-bottom: 20px; }
+            .intro-text { order: 2; }
+            
+            .vm-grid { grid-template-columns: 1fr; }
+            
+            .iso-icons { gap: 20px; }
+            .iso-box { width: 100%; }
+        }
+    </style>
+    <style>
+        
+ 
+/* --- Footer Styles --- */
+.site-footer {
+    
+    background-color:var(--primary-dark); /* Dark Charcoal Background */
+    color: #ffffff; /* Light Grey Text for readability */
+    padding-top: 80px;
+    font-size: 0.95rem;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr; /* 1st column wider for intro */
+    gap: 50px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #333;
+}
+
+/* Column Styling */
+.footer-col h3 {
+    color: #fff;
+    font-family: var(--font-heading);
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--primary-color); /* Teal highlight */
+}
+
+/* Logo & Desc */
+.f-logo-img {
+    height: 50px;
+    margin-bottom: 20px;
+    /* Optional: If logo is dark, invert it for footer */
+    /* filter: brightness(0) invert(1); */ 
+}
+
+.footer-desc {
+    line-height: 1.6;
+    margin-bottom: 25px;
+    max-width: 300px;
+}
+
+/* Links List */
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #b0b0b0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.footer-links a::before {
+    content: '\f105'; /* FontAwesome Chevron */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 8px;
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    transition: margin-right 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #fff;
+    padding-left: 5px; /* Subtle slide effect */
+}
+
+/* Contact List */
+.contact-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.contact-list i {
+    color: var(--primary-color);
+    margin-right: 15px;
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+.contact-list span {
+    color: #fff;
+}
+
+/* Social Icons */
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #fff;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Copyright Bar */
+.footer-bottom {
+    background: #111; /* Darker shade */
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.85rem;
+}
+/* --- Footer Bottom & Branding --- */
+.copyright-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.copyright-flex p {
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.separator {
+    margin: 0 10px;
+    color: #444;
+}
+
+.coded-brand {
+    color: #0dceb1; /* Defined earlier (#006c5b) */
+    font-weight: 800; /* Extra Bold */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Mobile Tweak: Stack them neatly */
+@media (max-width: 600px) {
+    .copyright-flex p {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .separator {
+        display: none; /* Hide separator on mobile */
+    }
+}
+/* --- Mobile Responsive --- */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack all columns */
+        gap: 40px;
+        text-align: left; /* Keep left alignment for neatness */
+    }
+
+    .footer-desc {
+        max-width: 100%;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <header class="about-hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content animate">
+            <h1 class="hero-title">Who We Are</h1>
+            <p class="hero-subtitle">Pioneering sustainable industrial solutions in Saudi Arabia.</p>
+        </div>
+    </header>
+
+    <section class="intro-section">
+        <div class="container intro-grid">
+            <div class="intro-text animate delay-1">
+                <span class="section-tag">About Misbar</span>
+                <h2 class="section-heading">Excellence in Every Drop</h2>
+                <p class="lead-text">
+                    Misbar Industrial Business Company is a leading refiner and supplier of high-purity hydrocarbon products, serving the industrial backbone of the Kingdom.
+                </p>
+                <p class="intro-desc">
+                    As a proud subsidiary of <strong>ChemRef Holdings</strong>, we are committed to Vision 2030 by localizing the manufacturing of essential industrial fluids. Our facility in Dammam utilizes advanced separation technologies to produce solvents, base oils, and process fluids that drive efficiency across sectors.
+                </p>
+                <p class="intro-desc">
+                    We combine technical expertise with operational agility to meet the specific needs of our clients, ensuring supply chain reliability and superior product quality.
+                </p>
+            </div>
+            
+            <div class="intro-img animate delay-2">
+                <img src="../images/10.webp" alt="Misbar Factory View">
+            </div>
+        </div>
+    </section>
+
+    <section class="vm-section">
+        <div class="container">
+            <div class="vm-grid">
+                
+                <div class="vm-card animate delay-1">
+                    <div class="vm-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Our Vision</h3>
+                    <p>To be the regional benchmark for high-quality hydrocarbon solutions, driving industrial self-sufficiency and sustainable growth in the Kingdom of Saudi Arabia.</p>
+                </div>
+
+                <div class="vm-card animate delay-2">
+                    <div class="vm-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Our Mission</h3>
+                    <p>To deliver superior refined products through operational excellence, strict quality control, and customer-centric innovation, while upholding the highest safety standards.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="iso-strip">
+        <div class="container">
+            <h2 class="iso-title animate">Certified for <span>Quality & Safety</span></h2>
+            
+            <div class="iso-icons animate delay-1">
+                <div class="iso-box"> 
+                    <h4>ISO 9001:2015</h4>
+                    <p style="font-size: 0.8rem; color: #ccc;">Quality Management</p>
+                </div>
+
+                <div class="iso-box"> 
+                    <h4>ISO 14001:2015</h4>
+                    <p style="font-size: 0.8rem; color: #ccc;">Environmental Mgmt</p>
+                </div>
+
+                <div class="iso-box"> 
+                    <h4>ISO 45001:2018</h4>
+                    <p style="font-size: 0.8rem; color: #ccc;">Health & Safety</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     
+ <!--footer -->
+ <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">
+                        <img src="../images/logo.png" alt="Misbar Logo" class="f-logo-img">
+                    </a>
+                    <p class="footer-desc">
+                        Part of ChemRef Holdings. Advancing local manufacturing under Vision 2030 with high-purity hydrocarbon solutions.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                       <li><a href="../index.html">Home</a></li>
+                        <li><a href="./About.html">About Us</a></li>
+                        <li><a href="./Product.html">Our Products</a></li>
+                        <li><a href="./Quality.html">Quality Control</a></li>
+                        <li><a href="./Contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Get in Touch</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Dammam 3rd Industrial City,<br> Saudi Arabia</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+966 (0)54 874 8666</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>misbar@chemref.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+      <div class="footer-bottom">
+    <div class="container copyright-flex">
+        <p>
+            &copy; 2025 Misbar Industrial Business Company. All Rights Reserved. 
+            <span class="separator">|</span> 
+            Designed by <a href="https://codedclouds.org"><span class="coded-brand">CODEDCLOUDS</span></a>
+        </p>
+    </div>
+</div>
+    </footer> 
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operations Gallery - Misbar Industrial</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- 1. THEME SETUP --- */
+        :root {
+            --primary-color: #008f7a; /* Misbar Teal */
+            --dark-bg: #ffffff;
+            --light-bg: #f4f4f4;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--dark-bg); /* Dark Theme for Gallery looks Premium */
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* --- 2. HEADER --- */
+        .gallery-header {
+            padding: 60px 20px;
+            text-align: center;
+            
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0, 143, 122, 0.7) 100%);
+            color: #fff;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .gallery-header h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .gallery-header p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        /* --- 3. MASONRY GALLERY (Desktop: Mixed Sizes) --- */
+        .gallery-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Magic Property for "Pinterest" Style */
+        .masonry-columns {
+            column-count: 4; /* 4 Columns on large screens */
+            column-gap: 15px;
+        }
+
+        .gallery-item {
+            break-inside: avoid; /* Prevents cutting images in half */
+            margin-bottom: 15px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #222;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto; /* Maintains original aspect ratio (Chota/Bra) */
+            display: block;
+            transition: transform 0.5s ease;
+            opacity: 0.9;
+        }
+
+        /* Hover Effect */
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 143, 122, 0.3);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        /* Overlay on Hover */
+        .item-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .item-overlay {
+            opacity: 1;
+        }
+
+        .item-overlay i {
+            color: #fff;
+            font-size: 2rem;
+            background: var(--primary-color);
+            padding: 15px;
+            border-radius: 50%;
+        }
+
+        /* --- 4. FLOATING HOME BUTTON --- */
+        .float-home {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: #fff;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            z-index: 100;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .float-home:hover { transform: scale(1.1); background: #006c5b; }
+
+        /* --- 5. MOBILE RESPONSIVE (Strict Grid) --- */
+        @media (max-width: 900px) {
+            .masonry-columns { column-count: 3; }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-header { padding: 40px 20px; }
+            .gallery-header h1 { font-size: 1.8rem; }
+            
+            /* CHANGE TO GRID FOR MOBILE */
+            .masonry-columns {
+                column-count: auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* 2 Columns strict */
+                gap: 10px;
+            }
+
+            .gallery-item { margin-bottom: 0; }
+
+            .gallery-item img {
+                height: 160px; /* Fixed Height for uniform look */
+                object-fit: cover; /* Crops image to fill the square */
+            }
+            
+            .item-overlay { display: none; } /* No hover on mobile */
+        }
+    </style>
+    <style>
+        
+ 
+/* --- Footer Styles --- */
+.site-footer {
+    
+    background-color:#006c5b; /* Dark Charcoal Background */
+    color: #ffffff; /* Light Grey Text for readability */
+    padding-top: 80px;
+    font-size: 0.95rem;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr; /* 1st column wider for intro */
+    gap: 50px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #333;
+}
+
+/* Column Styling */
+.footer-col h3 {
+    color: #fff;
+    font-family: var(--font-heading);
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--primary-color); /* Teal highlight */
+}
+
+/* Logo & Desc */
+.f-logo-img {
+    height: 50px;
+    margin-bottom: 20px;
+    /* Optional: If logo is dark, invert it for footer */
+    /* filter: brightness(0) invert(1); */ 
+}
+
+.footer-desc {
+    line-height: 1.6;
+    margin-bottom: 25px;
+    max-width: 300px;
+}
+
+/* Links List */
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #b0b0b0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.footer-links a::before {
+    content: '\f105'; /* FontAwesome Chevron */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 8px;
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    transition: margin-right 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #fff;
+    padding-left: 5px; /* Subtle slide effect */
+}
+
+/* Contact List */
+.contact-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.contact-list i {
+    color: var(--primary-color);
+    margin-right: 15px;
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+.contact-list span {
+    color: #fff;
+}
+
+/* Social Icons */
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #fff;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Copyright Bar */
+.footer-bottom {
+    background: #111; /* Darker shade */
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.85rem;
+}
+/* --- Footer Bottom & Branding --- */
+.copyright-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.copyright-flex p {
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.separator {
+    margin: 0 10px;
+    color: #444;
+}
+
+.coded-brand {
+    color: #0dceb1; /* Defined earlier (#006c5b) */
+    font-weight: 800; /* Extra Bold */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Mobile Tweak: Stack them neatly */
+@media (max-width: 600px) {
+    .copyright-flex p {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .separator {
+        display: none; /* Hide separator on mobile */
+    }
+}
+/* --- Mobile Responsive --- */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack all columns */
+        gap: 40px;
+        text-align: left; /* Keep left alignment for neatness */
+    }
+
+    .footer-desc {
+        max-width: 100%;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <div class="gallery-header">
+        <h1>Gallery</h1>
+        <p>A glimpse into our manufacturing excellence.</p>
+    </div>
+
+    <div class="gallery-container">
+        <div class="masonry-columns">
+            
+            <div class="gallery-item"><img src="../images/1.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/2.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/3.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/4.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/5.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            
+            <div class="gallery-item"><img src="../images/6.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/7.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/8.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/9.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/10.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+
+            <div class="gallery-item"><img src="../images/11.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/12.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/13.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/14.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/15.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+
+            <div class="gallery-item"><img src="../images/16.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/17.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/18.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/19.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/20.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+
+            <div class="gallery-item"><img src="../images/21.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/22.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/23.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/24.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/25.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+
+            <div class="gallery-item"><img src="../images/26.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/27.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/36.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/37.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/38.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+            <div class="gallery-item"><img src="../images/39.webp" alt="Misbar"><div class="item-overlay"><i class="fas fa-search-plus"></i></div></div>
+
+        </div>
+    </div>
+
+    <!--footer -->
+ <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">
+                        <img src="../images/logo.png" alt="Misbar Logo" class="f-logo-img">
+                    </a>
+                    <p class="footer-desc">
+                        Part of ChemRef Holdings. Advancing local manufacturing under Vision 2030 with high-purity hydrocarbon solutions.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                         <li><a href="../index.html">Home</a></li>
+                        <li><a href="./About.html">About Us</a></li>
+                        <li><a href="./Product.html">Our Products</a></li>
+                        <li><a href="./Quality.html">Quality Control</a></li>
+                        <li><a href="./Contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Get in Touch</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Dammam 3rd Industrial City,<br> Saudi Arabia</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+966 (0)54 874 8666</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>misbar@chemref.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+      <div class="footer-bottom">
+    <div class="container copyright-flex">
+        <p>
+            &copy; 2025 Misbar Industrial Business Company. All Rights Reserved. 
+            <span class="separator">|</span> 
+            Designed by <a href="https://codedclouds.org"><span class="coded-brand">CODEDCLOUDS</span></a>
+        </p>
+    </div>
+</div>
+    </footer> 
+
+</body>
+</html>

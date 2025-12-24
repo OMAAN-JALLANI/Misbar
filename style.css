@@ -1,0 +1,1053 @@
+/* --- Variables & Reset --- */
+:root {
+    /* Misbar Brand Colors extracted from Logo */
+    --primary-color: #008f7a; /* Teal/Greenish */
+    --primary-dark: #006c5b;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+    --overlay-color: rgba(0, 35, 30, 0.75); /* Dark Green Tint */
+    
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- Navigation --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95); /* Clean White Nav */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    padding: 15px 0;
+    transition: var(--transition);
+}
+
+.logo img {
+    height: 55px; /* Adjustable based on actual logo file */
+    width: auto;
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links li a {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    transition: var(--transition);
+}
+
+.nav-links li a:hover, .nav-links li a.active {
+    color: var(--primary-color);
+}
+
+/* Special Button Style for Contact in Nav */
+.btn-nav {
+    background: var(--primary-color);
+    color: #fff !important;
+    padding: 10px 25px;
+    border-radius: 4px;
+}
+
+.btn-nav:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* --- Hero Section --- */
+.hero {
+    position: relative;
+    height: 100vh; /* Full Screen */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-light);
+}
+
+/* Video Background Setup */
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* The Overlay - Makes text pop & adds Brand Color */
+.video-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient from Dark Grey to Misbar Teal */
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0, 143, 122, 0.6) 100%);
+}
+
+/* Hero Content */
+.hero-content {
+    max-width: 800px;
+    padding: 20px;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* Buttons */
+.cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    padding: 15px 35px;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.btn-secondary:hover {
+    background: #fff;
+    color: var(--primary-color);
+}
+
+/* --- Mobile Menu (Hamburger) --- */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--text-dark);
+}
+
+/* --- Animations --- */
+.animate-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Responsive Media Queries --- */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        z-index: 2000;
+    }
+
+    /* Mobile Nav Logic */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        background: #fff;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        transition: 0.4s ease;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    /* Hamburger Animation */
+    .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* Hero Responsive */
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .cta-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- who we areeeee --- */
+
+/* --- General Section Styles --- */
+.section-padding {
+    padding: 80px 0;
+}
+
+.sub-heading {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.section-heading {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.divider {
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* --- Who We Are (Split Layout) --- */
+.split-layout {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.text-content p {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 1.05rem;
+}
+
+.btn-text {
+    color: var(--primary-dark);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+    transition: var(--transition);
+}
+
+.btn-text:hover {
+    color: var(--primary-color);
+    letter-spacing: 1px;
+}
+
+/* Image Side with Badge */
+.image-content {
+    flex: 1;
+    position: relative;
+}
+
+.image-wrapper img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.experience-badge {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 143, 122, 0.4);
+    text-align: center;
+}
+
+.experience-badge .count {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.experience-badge .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* --- Strengths Section (Dark Grid) --- */
+.strengths-section {
+    background: #1a1a1a; /* Dark Industrial Grey */
+    padding: 100px 0;
+    color: #fff;
+    margin-top: 50px;
+}
+
+.center-text {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+}
+
+.text-white { color: #fff; }
+.text-light-grey { color: #aaa; margin-top: 10px; }
+
+.strengths-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Strength Cards */
+.strength-card {
+    background: #252525;
+    padding: 40px 30px;
+    border-radius: 6px;
+    transition: var(--transition);
+    border-bottom: 4px solid transparent;
+}
+
+.strength-card:hover {
+    transform: translateY(-10px);
+    background: #2c2c2c;
+    border-bottom: 4px solid var(--primary-color);
+}
+
+.icon-box {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    transition: var(--transition);
+}
+
+.strength-card:hover .icon-box {
+    transform: scale(1.1);
+}
+
+.strength-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+}
+
+.strength-card p {
+    color: #bbb;
+    font-size: 0.95rem;
+}
+
+/* --- Scroll Animation Classes --- */
+.hidden-left { opacity: 0; transform: translateX(-50px); transition: all 1s ease; }
+.hidden-right { opacity: 0; transform: translateX(50px); transition: all 1s ease; }
+.hidden-up { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+
+.show-animate {
+    opacity: 1;
+    transform: translate(0);
+}
+
+/* --- Responsive for New Sections --- */
+@media (max-width: 768px) {
+    .split-layout {
+        flex-direction: column;
+    }
+    
+    .image-content {
+        margin-top: 20px;
+    }
+
+    .experience-badge {
+        left: 0;
+        bottom: -10px;
+        padding: 10px 20px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- PRODUCT OVERVIEW --- */
+
+/* --- Products Section (Redesigned) --- */
+.products-section {
+    background-color: #f8f9fa; /* Very light grey */
+    padding-bottom: 100px;
+}
+
+/* Parallax Visual Header */
+.product-header-visual {
+    position: relative;
+    height: 450px; /* Taller header for impact */
+    background-image: url('./images/39.webp'); /* Industrial BG */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Parallax effect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.overlay-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient: Dark at bottom, transparent at top */
+    background: linear-gradient(to bottom, rgba(0, 35, 30, 0.7), rgba(0, 35, 30, 0.95));
+}
+
+.content-z {
+    position: relative;
+    z-index: 2;
+    flex-direction: column; /* Stack text */
+}
+
+.badge-pill {
+    background: var(--primary-color); /* Misbar Teal */
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.section-title-large {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Layout Logic (Flexbox for Centering) --- */
+.relative-up {
+    position: relative;
+    z-index: 10;
+    margin-top: -80px; /* Pulls cards UP over the header */
+}
+
+.products-flex-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Key: This centers the last item */
+    gap: 40px; /* Space between cards */
+}
+
+/* Card Design */
+.pro-card {
+    background: #fff;
+    width: calc(50% - 40px); /* 2 Cards per row exactly */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.pro-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+.card-image {
+    height: 260px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.pro-card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+.card-body {
+    padding: 35px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-body h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.card-body p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.details-btn {
+    margin-top: auto; /* Pushes button to bottom */
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: 2px solid var(--primary-color);
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.details-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* --- ISO Section Styles --- */
+.iso-display {
+    background: #fff;
+    padding: 60px 0;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.iso-label {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+    font-size: 0.85rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.iso-icons-row {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.iso-img {
+    height: 70px;
+    width: auto;
+    opacity: 0.6;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+}
+
+.iso-img:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+/* --- Mobile Responsive Fixes --- */
+@media (max-width: 900px) {
+    .pro-card {
+        width: 100%; /* Full width on mobile/tablet */
+        margin-bottom: 20px;
+    }
+
+    .products-flex-wrapper {
+        gap: 20px;
+    }
+
+    .section-title-large {
+        font-size: 2rem;
+    }
+    
+    .product-header-visual {
+        height: 350px;
+    }
+    
+    .relative-up {
+        margin-top: -60px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+/* --- Footer Styles --- */
+.site-footer {
+    background-color:var(--primary-dark); /* Dark Charcoal Background */
+    color: #ffffff; /* Light Grey Text for readability */
+    padding-top: 80px;
+    font-size: 0.95rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr; /* 1st column wider for intro */
+    gap: 50px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #333;
+}
+
+/* Column Styling */
+.footer-col h3 {
+    color: #fff;
+    font-family: var(--font-heading);
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--primary-color); /* Teal highlight */
+}
+
+/* Logo & Desc */
+.f-logo-img {
+    height: 50px;
+    margin-bottom: 20px;
+    /* Optional: If logo is dark, invert it for footer */
+    /* filter: brightness(0) invert(1); */ 
+}
+
+.footer-desc {
+    line-height: 1.6;
+    margin-bottom: 25px;
+    max-width: 300px;
+}
+
+/* Links List */
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #b0b0b0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.footer-links a::before {
+    content: '\f105'; /* FontAwesome Chevron */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 8px;
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    transition: margin-right 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #fff;
+    padding-left: 5px; /* Subtle slide effect */
+}
+
+/* Contact List */
+.contact-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.contact-list i {
+    color: var(--primary-color);
+    margin-right: 15px;
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+.contact-list span {
+    color: #fff;
+}
+
+/* Social Icons */
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #fff;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Copyright Bar */
+.footer-bottom {
+    background: #111; /* Darker shade */
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.85rem;
+}
+/* --- Footer Bottom & Branding --- */
+.copyright-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.copyright-flex p {
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.separator {
+    margin: 0 10px;
+    color: #444;
+}
+
+.coded-brand {
+    color: #0dceb1; /* Defined earlier (#006c5b) */
+    font-weight: 800; /* Extra Bold */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Mobile Tweak: Stack them neatly */
+@media (max-width: 600px) {
+    .copyright-flex p {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .separator {
+        display: none; /* Hide separator on mobile */
+    }
+}
+/* --- Mobile Responsive --- */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack all columns */
+        gap: 40px;
+        text-align: left; /* Keep left alignment for neatness */
+    }
+
+    .footer-desc {
+        max-width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Paaaaaaaaaaaaaaaaaaa --- */
+
+/* --- NEW VISION SECTION (Industrial Dashboard Style) --- */
+.vision-panel-section {
+    padding: 100px 0;
+    background-color: #0b1116; /* Deep Black/Blue */
+    background-image: radial-gradient(circle at center, #16242d 0%, #0b1116 100%);
+    color: #fff;
+    text-align: center;
+}
+
+.vision-head-text {
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.v-title {
+    font-size: 2.8rem;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.highlight {
+    color: #0dacaa; /* New Requested Color */
+    text-shadow: 0 0 20px rgba(13, 172, 170, 0.4); /* Subtle Neon Glow */
+}
+
+.v-divider {
+    height: 4px;
+    width: 80px;
+    background: #0dacaa;
+    margin: 0 auto 20px auto;
+    border-radius: 2px;
+}
+
+.v-subtitle {
+    font-size: 1.1rem;
+    color: #aab2b8;
+    font-weight: 300;
+}
+
+/* --- THE DASHBOARD PANEL --- */
+.vision-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden; /* Keeps borders inside rounded corners */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.v-item {
+    flex: 1; /* Equal Width Columns */
+    padding: 50px 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.08); /* Vertical Separators */
+    transition: all 0.4s ease;
+    position: relative;
+    min-width: 200px;
+}
+
+/* Remove border from last item */
+.v-item:last-child {
+    border-right: none;
+}
+
+/* Hover Effect */
+.v-item:hover {
+    background: rgba(13, 172, 170, 0.05); /* Very subtle teal tint */
+    transform: translateY(-5px);
+    box-shadow: 0 -5px 20px rgba(13, 172, 170, 0.1) inset; /* Inner glow */
+}
+
+.v-icon-box {
+    font-size: 2.5rem;
+    color: #0dacaa;
+    margin-bottom: 25px;
+    height: 70px;
+    width: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(13, 172, 170, 0.1); /* Circle BG */
+    transition: 0.4s;
+}
+
+.v-item:hover .v-icon-box {
+    background: #0dacaa;
+    color: #fff;
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 15px #0dacaa;
+}
+
+.v-item h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.v-item p {
+    font-size: 0.9rem;
+    color: #88929b;
+    line-height: 1.6;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 991px) {
+    .vision-dashboard {
+        flex-wrap: wrap;
+    }
+    .v-item {
+        flex: 1 1 45%; /* 2 items per row on tablet */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .v-item:nth-child(2), .v-item:nth-child(4) {
+        border-right: none; /* Remove right border for grid layout */
+    }
+}
+
+@media (max-width: 600px) {
+    .vision-panel-section { padding: 60px 0; }
+    
+    .v-title { font-size: 2rem; }
+
+    .vision-dashboard {
+        flex-direction: column; /* Stack vertically */
+    }
+
+    .v-item {
+        flex: 1 1 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 40px 20px;
+    }
+
+    .v-item:last-child {
+        border-bottom: none;
+    }
+}
